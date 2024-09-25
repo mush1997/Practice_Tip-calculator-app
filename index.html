@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <title>Frontend Mentor | Tip calculator app</title>
+
+  <style>
+    .attribution {
+      padding: 10px;
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .attribution a {
+      font-size: 11px;
+      color: hsl(228, 45%, 44%);
+    }
+  </style>
+</head>
+
+<body>
+  <img src="images/logo.svg" alt="logo">
+  <form>
+    <section class="calculator">
+      <div class="billPart">
+        <p>Bill</p>
+        <input type="text" name="bill" id="bill" placeholder="0">
+      </div>
+      <div class="rates">
+        <p>Select Tip %</p>
+        <div class="options">
+          <input type="button" name="rate" value="5%">
+          <input type="button" name="rate" value="10%">
+          <input type="button" name="rate" value="15%">
+          <input type="button" name="rate" value="25%">
+          <input type="button" name="rate" value="50%">
+          <input type="text" name="customRate" id="customRate" placeholder="Custom">
+        </div>
+      </div>
+      <div class="peoplePart">
+        <p>Number of People <span>Can't be zero</span></p>
+        <input type="text" name="people" id="people" placeholder="0">
+      </div>
+    </section>
+
+    <section class="result">
+      <div class="wrapper">
+        <p>Tip Amount<span>/ person</span></p>
+        <div id="tip">$0.00</div>
+      </div>
+      <div class="wrapper">
+        <p>Total<span>/ person</span></p>
+        <div id="total">$0.00</div>
+      </div>
+      <button type="reset" id="reset">Reset</button>
+    </section>
+  </form>
+
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Coded by <a href="#">mush</a>.
+  </div>
+
+  <script>
+    const bill = document.getElementById("bill");
+    const rateOptions = document.querySelector(".options");
+    const customRate = document.getElementById("customRate");
+    const people = document.getElementById("people");
+    const tip = document.getElementById("tip");
+    const total = document.getElementById("total");
+    const resetBtn = document.getElementById("reset");
+
+    let billAmount;
+    let tipRate;
+    let totalPeople;
+
+    function recordBill() {
+      billAmount = parseFloat(bill.value);
+      calculate(billAmount, tipRate, totalPeople);
+    }
+
+    function recordRate(event) {
+      let allInputs = Array.from(event.target.parentElement.children);
+      allInputs.forEach(input => input.classList.remove("clicked"));
+      event.target.classList.add("clicked");
+
+      if (event.target.name === "rate" && customRate.value !== undefined) {
+        customRate.value = "";
+      }
+
+      tipRate = parseFloat(event.target.value) / 100;
+      calculate(billAmount, tipRate, totalPeople);
+    }
+
+    function recordCustomRate() {
+      tipRate = parseFloat(customRate.value) / 100;
+      calculate(billAmount, tipRate, totalPeople);
+    }
+
+    function recordPeople() {
+      totalPeople = parseInt(people.value);
+      totalPeople === 0 ? people.parentElement.classList.add("warning") : people.parentElement.classList.remove("warning");
+      calculate(billAmount, tipRate, totalPeople);
+    }
+
+    function calculate(bill, rate, people) {
+      if ((!bill || bill < 0) || (!rate || rate < 0) || (!people || people < 1)) { return };
+
+      let tipOfEachPerson = (bill / people * rate).toFixed(2);
+      let totalOfEachPerson = (bill / people * (1 + rate)).toFixed(2);
+
+      tip.textContent = tipOfEachPerson;
+      total.textContent = totalOfEachPerson;
+      resetBtn.classList.add("changeBg");
+    }
+
+    function resetForm() {
+      billAmount = 0;
+      tipRate = "";
+      totalPeople = 0;
+
+      rateOptions.querySelectorAll("input").forEach(input => input.classList.remove("clicked"));
+      customRate.value = "";
+      people.parentElement.classList.remove("warning");
+
+      tip.textContent = "$0.00";
+      total.textContent = "$0.00";
+      resetBtn.classList.remove("changeBg");
+    }
+
+    bill.addEventListener("keyup", recordBill);
+    rateOptions.addEventListener("click", recordRate);
+    customRate.addEventListener("keyup", recordCustomRate);
+    people.addEventListener("keyup", recordPeople);
+    resetBtn.addEventListener("click", resetForm);
+  </script>
+</body>
+
+</html>

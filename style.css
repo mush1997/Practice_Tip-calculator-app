@@ -1,0 +1,270 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Space Mono";
+  font-size: 16px;
+}
+
+body {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: hsl(185, 41%, 84%);
+}
+body form {
+  margin: 30px 0;
+  padding: 20px;
+  width: 75%;
+  min-width: 730px;
+  max-width: 800px;
+  background-color: hsl(0, 0%, 100%);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+body form section {
+  flex-basis: 50%;
+}
+body form .calculator div {
+  margin-bottom: 30px;
+}
+body form .calculator div p {
+  font-size: 1rem;
+  color: hsl(186, 14%, 43%);
+  margin-bottom: 6px;
+}
+body form .calculator div input {
+  padding: 4px 10px;
+  width: 100%;
+  background-color: hsl(189, 41%, 97%);
+  border-radius: 4px;
+  border: none;
+  text-align: right;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: hsl(183, 100%, 15%);
+}
+body form .calculator div input::-moz-placeholder {
+  color: hsl(184, 14%, 56%);
+}
+body form .calculator div input::placeholder {
+  color: hsl(184, 14%, 56%);
+}
+body form .calculator div input:hover {
+  cursor: pointer;
+}
+body form .calculator div input:focus {
+  outline-color: hsl(172, 67%, 45%);
+  caret-color: hsl(172, 67%, 45%);
+}
+body form .calculator .billPart input {
+  background-image: url("images/icon-dollar.svg");
+  background-repeat: no-repeat;
+  background-position: left 10px center;
+}
+body form .calculator .rates .options {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: repeat(3, 120px);
+  gap: 10px;
+}
+body form .calculator .rates .options input[type=button] {
+  padding: 4px 10px;
+  background-color: hsl(183, 100%, 15%);
+  border-radius: 4px;
+  border: none;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: hsl(0, 0%, 100%);
+}
+body form .calculator .rates .options input[type=button]:hover {
+  cursor: pointer;
+  background-color: hsl(185, 41%, 84%);
+  color: hsl(183, 100%, 15%);
+}
+body form .calculator .rates .options input[type=button].clicked {
+  background-color: hsl(185, 41%, 84%);
+  color: hsl(183, 100%, 15%);
+}
+body form .calculator .rates .options input[type=text] {
+  text-align: center;
+}
+body form .calculator .rates .options input[type=text]:focus {
+  text-align: right;
+}
+body form .calculator .peoplePart p {
+  width: 100%;
+  position: relative;
+}
+body form .calculator .peoplePart p span {
+  color: orangered;
+  position: absolute;
+  right: 0;
+  visibility: hidden;
+}
+body form .calculator .peoplePart input {
+  background-image: url("images/icon-person.svg");
+  background-repeat: no-repeat;
+  background-position: left 10px center;
+}
+body form .calculator .peoplePart.warning span {
+  visibility: visible;
+}
+body form .calculator .peoplePart.warning input {
+  outline: 2px solid orangered;
+}
+body form .result {
+  padding: 20px;
+  background-color: hsl(183, 100%, 15%);
+  border-radius: 10px;
+  aspect-ratio: 1/1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 20px;
+}
+body form .result .wrapper {
+  flex-basis: 100%;
+  display: flex;
+  align-items: center;
+}
+body form .result .wrapper p {
+  flex-basis: 50%;
+  font-size: 1rem;
+  color: hsl(0, 0%, 100%);
+}
+body form .result .wrapper p span {
+  display: block;
+  font-size: 0.75rem;
+}
+body form .result .wrapper div {
+  flex-basis: 50%;
+  text-align: right;
+  font-size: 2rem;
+  font-weight: 700;
+  color: hsl(172, 67%, 45%);
+}
+body form .result button {
+  padding: 8px;
+  width: 100%;
+  align-self: flex-end;
+  background-color: hsl(186, 14%, 43%);
+  border-radius: 8px;
+  border: none;
+  color: hsl(184, 14%, 56%);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+body form .result button:hover {
+  cursor: pointer;
+  background-color: hsl(185, 41%, 84%);
+  color: hsl(183, 100%, 15%);
+}
+body form .result button.changeBg {
+  background-color: hsl(172, 67%, 45%);
+  color: hsl(183, 100%, 15%);
+}
+
+@media screen and (max-width: 800px) {
+  body form {
+    width: 90%;
+    min-width: auto;
+    max-width: auto;
+  }
+  body form .calculator div input {
+    font-size: 1.2rem;
+  }
+  body form .calculator .rates .options {
+    grid-template-columns: repeat(3, 80px);
+  }
+  body form .calculator .rates .options button {
+    padding: 4px 0;
+    font-size: 1rem;
+  }
+  body form .calculator .rates .options input {
+    font-size: 1rem;
+  }
+  body form .calculator .peoplePart {
+    position: relative;
+  }
+  body form .calculator .peoplePart p {
+    position: static;
+  }
+  body form .calculator .peoplePart p span {
+    font-size: 0.75rem;
+    left: 0;
+    bottom: -20px;
+  }
+  body form .result .wrapper p {
+    padding-right: 6px;
+  }
+  body form .result .wrapper div {
+    font-size: 1.75rem;
+  }
+}
+@media screen and (max-width: 700px) {
+  body {
+    padding: 20px;
+  }
+  body form {
+    padding: 30px;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  body form section {
+    flex-basis: auto;
+  }
+  body form .calculator {
+    max-width: 460px;
+  }
+  body form .calculator div input {
+    font-size: 1.5rem;
+  }
+  body form .calculator .rates .options {
+    grid-template-rows: repeat(3, minmax(60px, 1fr));
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  body form .calculator .rates .options button {
+    font-size: 1.25rem;
+  }
+  body form .calculator .rates .options input::-moz-placeholder {
+    font-size: 1rem;
+  }
+  body form .calculator .rates .options input::placeholder {
+    font-size: 1rem;
+  }
+  body form .calculator .rates .options input {
+    font-size: 1.25rem;
+  }
+  body form .calculator .peoplePart p span {
+    font-size: 1rem;
+    bottom: -24px;
+  }
+  body form .result {
+    padding: 30px;
+    max-width: 430px;
+    aspect-ratio: auto;
+  }
+  body form .result .wrapper {
+    margin-bottom: 30px;
+  }
+  body form .result .wrapper div {
+    font-size: 1.75rem;
+  }
+}
+@media screen and (max-width: 380px) {
+  body form {
+    width: 100%;
+  }
+  body form .result {
+    padding: 20px;
+  }
+}/*# sourceMappingURL=style.css.map */
